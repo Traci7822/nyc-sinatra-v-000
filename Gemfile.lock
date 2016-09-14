@@ -19,7 +19,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
-    arel (7.1.1)
+    arel (7.1.2)
     bond (0.5.1)
     capybara (2.8.1)
       addressable
@@ -125,4 +125,4 @@ DEPENDENCIES
   tux
 
 BUNDLED WITH
-   1.13.0
+   1.13.1

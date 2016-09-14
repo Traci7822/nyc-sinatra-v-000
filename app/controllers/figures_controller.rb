@@ -10,21 +10,29 @@ class FiguresController < ApplicationController
   end
 
   post '/figures/new' do
-    @figure = Figure.create(params[:figure])
-    @figure.titles << Title.create(params[:title])
-    @figure.landmarks << Landmark.create(params[:landmark])
-    @figure.save
+    figure = Figure.create(params[:figure])
+    figure.titles << Title.create(params[:title])
+    figure.landmarks << Landmark.create(params[:landmark])
+    figure.save
     redirect '/figures'
   end
 
-  get '/figures/:id' do 
+  get '/figures/:id' do
     @figure = Figure.find(params[:id])
-    redirect '/figures/#{id}/show'
+    erb :show
   end
 
-  get '/figures/:id/show' do
-    binding.pry
-    erb :show
+  post '/figures/:id' do
+    figure = Figure.find_by_id(params[:id])
+    figure.update(name: params[:figure][:name])
+    figure.titles << Title.create(params[:figure][:title_ids])
+    figure.landscapes << Landscape.create(params[:landscapes])
+    redirect "/figures/#{figure.id}"
+  end
+
+  get '/figures/:id/edit' do
+    @figure = Figure.find_by_id(params[:id])
+    erb :edit
   end
 
 end
